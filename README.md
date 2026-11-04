@@ -6,11 +6,16 @@ Struttura archiviazione:
 - **HDD (Media):** `/mnt/data/`
 
 ## 1. Ripristino servizi dockerizzati
-Servizi inclusi: Audiobookshelf, Immich, Jellyfin, Navidrome.
+Servizi inclusi:
+- Audiobookshelf (Audiolibri + Podcast)
+- Immich (Foto)
+- Jellyfin (Film + Serie Tv)
+- Kiwix (Offline Wiki)
+- Navidrome (Musica)
 
 1. Installa Docker e Git
 2. Clona questo repository in `~/homelab`
-3. Crea la directory `~/appdata` con una sottodirectory per servizio
+3. Crea la directory `~/appdata` con una sottodirectory per servizio (eccetto kiwix - non ne ha bisogno in quanto stateless)
 4. Copia i file `.env`:
 	```bash
 	cp ~/homelab/.env.example ~/homelab/.env
