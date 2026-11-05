@@ -1,9 +1,11 @@
 # Home Server Infrastructure
 Repo per poter replicare velocemente infrastruttura dell'home server lanciando i servizi dockerizzati e non. I dati hostati non sono ovviamente qui.
 
-Struttura archiviazione:
-- **SSD (App Data):** `/home/gio/appdata/`
-- **HDD (Media):** `/mnt/data/`
+Struttura archiviazione suggerita:
+- in home (sperabilmente SSD) i dati dei servizi
+- in un HDD i dati hostati
+
+In entrambe una directory per servizio.
 
 ## 1. Ripristino servizi dockerizzati
 Servizi inclusi:
@@ -12,6 +14,7 @@ Servizi inclusi:
 - Jellyfin (Film + Serie Tv)
 - Kiwix (Offline Wiki)
 - Navidrome (Musica)
+- QbitTorrent (Torrent client)
 
 1. Installa Docker e Git
 2. Clona questo repository in `~/homelab`
@@ -20,11 +23,13 @@ Servizi inclusi:
 	```bash
 	cp ~/homelab/.env.example ~/homelab/.env
   	cp ~/homelab/immich/.env.example ~/homelab/immich/.env
+  	cp ~/homelab/qbittorrent/.env.example ~/homelab/qbittorrent/.env
    	```
 5. Configura i segreti:
 	- Percorso APPDATA in `~/homelab/.env`
 	- Percorso APPDATA e database password in `~/homelab/immich/.env`
-6. Link simbolico a `~/homelab/.env` per ogni servizio eccetto immich:
+	- Percorso APPDATA e info vpn in `~/homelab/qbittorrent/.env`
+6. Link simbolico a `~/homelab/.env` per ogni servizio eccetto immich e qbittorrent:
 	```bash
 	ln -s ~/homelab/.env ~/homelab/<servizio>/.env 
 	```

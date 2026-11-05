@@ -9,9 +9,9 @@ services:
       - 8096:8096/tcp
       - 7359:7359/udp
     volumes:
-      - ${APPDATA}/jellyfin/config:/config
-      - ${APPDATA}/jellyfin/cache:/cache
-      - /mnt/data/jellyfin:/media
+      - ${APPDATA_PATH}/jellyfin/config:/config
+      - ${APPDATA_PATH}/jellyfin/cache:/cache
+      - ${DATA_PATH}/jellyfin:/media
     restart: 'unless-stopped'
     devices:
       - /dev/dri:/dev/dri

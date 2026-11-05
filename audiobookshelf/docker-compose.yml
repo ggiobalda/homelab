@@ -8,14 +8,14 @@ services:
     volumes:
       # These volumes are needed to keep your library persistent
       # and allow media to be accessed by the ABS server.
-      - ${APPDATA}/audiobookshelf/config:/config
-      - ${APPDATA}/audiobookshelf/metadata:/metadata
+      - ${APPDATA_PATH}/audiobookshelf/config:/config
+      - ${APPDATA_PATH}/audiobookshelf/metadata:/metadata
       # The path to the left of the colon is the path on your computer,
       # and the path to the right of the colon is where the data is
       # available to ABS in Docker. You can change these lines freely
       # or add additional mounts for additional libraries.
-      - /mnt/data/audiobookshelf/audiobooks:/audiobooks
-      - /mnt/data/audiobookshelf/podcasts:/podcasts
+      - ${DATA_PATH}/audiobookshelf/audiobooks:/audiobooks
+      - ${DATA_PATH}/audiobookshelf/podcasts:/podcasts
     environment:
       - TZ=Europe/Rome
       # Add other environment variables here

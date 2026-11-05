@@ -1,0 +1,35 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8080:8080 # Exposes qBittorrent Web UI to your local LAN
+    environment:
+      - VPN_SERVICE_PROVIDER=surfshark
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${SURFSHARK_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${SURFSHARK_ADDRESS}
+      - SERVER_COUNTRIES=${VPN_COUNTRY}
+      - SERVER_CITIES=${VPN_CITY}
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Rome
+      - WEBUI_PORT=8080
+    volumes:
+      - ${APPDATA_PATH}/qbittorrent:/config
+      - ${DATA_PATH}:/data
+    restart: unless-stopped
+    depends_on:
+      gluetun:
+        condition: service_healthy
