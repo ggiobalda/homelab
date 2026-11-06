@@ -1,7 +1,8 @@
 services:
   navidrome:
     image: navidrome/navidrome:latest
-    user: 1000:1000 # must own the data folder and be able to read music folder(s). See Permissions below
+    container_name: navidrome
+    user: ${UID}:${UID} # must own the data folder and be able to read music folder(s). See Permissions below
     ports:
       - "4533:4533"
     restart: unless-stopped
