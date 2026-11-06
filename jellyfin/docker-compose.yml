@@ -12,6 +12,8 @@ services:
       - ${APPDATA_PATH}/jellyfin/config:/config
       - ${APPDATA_PATH}/jellyfin/cache:/cache
       - ${DATA_PATH}/jellyfin:/media
+    env_file:
+      - ../.env
     restart: 'unless-stopped'
     devices:
       - /dev/dri:/dev/dri

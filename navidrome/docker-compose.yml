@@ -11,3 +11,5 @@ services:
     volumes:
       - "${APPDATA_PATH}/navidrome/data:/data"
       - "${DATA_PATH}/navidrome:/music:ro"
+    env_file:
+      - ../.env

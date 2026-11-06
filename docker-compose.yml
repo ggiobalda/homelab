@@ -1,0 +1,7 @@
+include:
+  - jellyfin/docker-compose.yml
+  - navidrome/docker-compose.yml
+  - audiobookshelf/docker-compose.yml
+  - kiwix/docker-compose.yml
+  - immich/docker-compose.yml
+  - qbittorrent/docker-compose.yml

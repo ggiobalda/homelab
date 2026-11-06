@@ -1,5 +1,5 @@
 # Home Server Infrastructure
-Repo per poter replicare velocemente infrastruttura dell'home server lanciando i servizi dockerizzati e non. I dati hostati non sono ovviamente qui.
+Repo per poter replicare velocemente infrastruttura dell'home server (Ubuntu Server) lanciando i servizi dockerizzati e non. I dati hostati non sono ovviamente qui.
 
 Struttura archiviazione suggerita:
 - in home (sperabilmente SSD) una cartella `~/homelab` dove clonare questa repo con i docker files e una cartella `~/appdata` dove tenere dati locali dei servizi (database, cache, config, etc)
@@ -20,23 +20,18 @@ Servizi inclusi:
 
 1. Clona questo repository in `~/homelab`
 2. Crea la directory `~/appdata` con una sottodirectory per servizio (eccetto kiwix - non ne ha bisogno in quanto stateless)
-3. Copia i file `.env`:
-	```bash
-	cp ~/homelab/.env.example ~/homelab/.env
-  	cp ~/homelab/immich/.env.example ~/homelab/immich/.env
-  	cp ~/homelab/qbittorrent/.env.example ~/homelab/qbittorrent/.env
-   	```
-4. Configura i segreti:
-	- Percorso `APPDATA_PATH` e `DATA_PATH` in tutti e tre
-	- Database password in `~/homelab/immich/.env`
-	- Info VPN in `~/homelab/qbittorrent/.env`
-5. Crea un link simbolico a `~/homelab/.env` per ogni servizio (eccetto immich e qbittorrent):
-	```bash
-	ln -s ~/homelab/.env ~/homelab/<servizio>/.env 
 	```
-6. Avvia ogni servizio:
+	mkdir ~/appdata
+	mkdir ~/appdata/<servizio>
+	```
+3. Copia il file `.env` e configura i segreti
 	```bash
-	cd ~/homelab/<servizio>
+	cd ~/homelab
+	cp .env.example .env
+	nano .env
+   	```
+4. Avvia i servizi:
+	```bash
 	docker compose up -d
 	```
 

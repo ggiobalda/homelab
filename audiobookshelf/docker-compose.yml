@@ -16,8 +16,8 @@ services:
       # or add additional mounts for additional libraries.
       - ${DATA_PATH}/audiobookshelf/audiobooks:/audiobooks
       - ${DATA_PATH}/audiobookshelf/podcasts:/podcasts
-    environment:
-      - TZ=Europe/Rome
+    env_file:
+      - ../.env
       # Add other environment variables here
     restart: unless-stopped
     # Audiobookshelf does not use PUID or GUID environment variables.
