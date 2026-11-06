@@ -7,6 +7,8 @@ Struttura archiviazione suggerita:
 
 In entrambe creare una directory per servizio. 
 
+Sia Jellyfin (`/dev/dri`) sia Immich (`quicksync` in `extends`) presuppongono una CPU Intel con grafica integrata
+
 ## 1. Ripristino servizi dockerizzati
 Servizi inclusi:
 - Audiobookshelf (Audiolibri + Podcast)
@@ -43,7 +45,7 @@ Da reinstallare manualmente sul nuovo server.
 
 ### Tailscale
 ```bash
-curl -fsSL [https://tailscale.com/install.sh](https://tailscale.com/install.sh) | sh
+curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 ```
 
@@ -58,5 +60,5 @@ sudo systemctl enable --now cockpit.socket
 Interfaccia web sulla porta 8384. Dati e configurazione in `~/syncthing`.
 ```bash
 sudo apt install syncthing
-sudo systemctl enable --now syncthing@gio.service
+sudo systemctl enable --now syncthing@$USER.service
 ```
