@@ -1,13 +1,13 @@
 services:
   gluetun:
-    image: qmcgaw/gluetun:latest
+    image: qmcgaw/gluetun:v3
     container_name: gluetun
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
-      - 8080:8080 # Exposes qBittorrent Web UI to your local LAN
+      - ${LAN_IP}8080:8080 # Exposes qBittorrent Web UI to your local LAN
     env_file:
       - ../.env
     environment:
@@ -28,12 +28,17 @@ services:
     environment:
       - PUID=${UID}
       - PGID=${GUID}
-      - TZ=Europe/Rome
       - WEBUI_PORT=8080
     volumes:
       - ${APPDATA_PATH}/qbittorrent:/config
-      - ${DATA_PATH}:/data
+      - ${DATA_PATH}/audiobookshelf/audiobooks:/audiobooks
+      - ${DATA_PATH}/audiobookshelf/podcasts:/podcasts
+      - ${DATA_PATH}/jellyfin/movies:/movies
+      - ${DATA_PATH}/jellyfin/shows:/shows
+      - ${DATA_PATH}/navidrome:/music
     restart: unless-stopped
     depends_on:
       gluetun:
         condition: service_healthy
+        restart: true
+    restart: unless-stopped 
